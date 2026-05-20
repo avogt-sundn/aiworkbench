@@ -10,11 +10,11 @@
   "mounts": [
     "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
   ],
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -q '[profile aiworkbench]' /root/.aws/config 2>/dev/null || echo 'WARNING: [profile aiworkbench] not found in ~/.aws/config — add it (see .devcontainer/aws-config.example) then rebuild'",
-  "postStartCommand": "aws sts get-caller-identity --profile aiworkbench 2>/dev/null || aws sso login --profile aiworkbench; claude",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -q '[profile bedrock-dev]' /root/.aws/config 2>/dev/null || echo 'WARNING: [profile bedrock-dev] not found in ~/.aws/config — add it (see .devcontainer/aws-config.example) then rebuild'",
+  "postStartCommand": "aws sts get-caller-identity --profile bedrock-dev 2>/dev/null || aws sso login --sso-session sundn-session; claude",
   "remoteEnv": {
     "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_PROFILE": "aiworkbench",
+    "AWS_PROFILE": "bedrock-dev",
     "AWS_REGION": "eu-central-1"
   },
   "customizations": {

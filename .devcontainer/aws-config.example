@@ -1,10 +1,14 @@
-# Add this profile block to ~/.aws/config on the host.
+# Required entries in ~/.aws/config on the host.
 # The DevContainer bind-mounts ~/.aws into /root/.aws so no other setup is needed.
 
-[profile aiworkbench]
+[sso-session sundn-session]
 sso_start_url = https://d-9967058feb.awsapps.com/start
 sso_region = eu-central-1
-sso_account_id = 859551917552
-sso_role_name = DeveloperAccess
 sso_registration_scopes = sso:account:access
+
+[profile bedrock-dev]
+sso_session = sundn-session
+sso_account_id = 859551917552
+sso_role_name = AWS-Bedrock_Dev_Access
 region = eu-central-1
+output = json
