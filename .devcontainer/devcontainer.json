@@ -10,11 +10,12 @@
   "mounts": [
     "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
   ],
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
-  "postStartCommand": "claude",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && mkdir -p /root/.aws && grep -q '[profile aiworkbench]' /root/.aws/config 2>/dev/null || printf '[profile aiworkbench]\\nsso_start_url = https://d-9967058feb.awsapps.com/start\\nsso_region = eu-central-1\\nsso_account_id = 859551917552\\nsso_role_name = DeveloperAccess\\nsso_registration_scopes = sso:account:access\\nregion = eu-central-1\\n' >> /root/.aws/config",
+  "postStartCommand": "aws sts get-caller-identity --profile aiworkbench 2>/dev/null || aws sso login --profile aiworkbench; claude",
   "remoteEnv": {
     "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_REGION": "${localEnv:AWS_REGION}"
+    "AWS_PROFILE": "aiworkbench",
+    "AWS_REGION": "eu-central-1"
   },
   "customizations": {
     "vscode": {
