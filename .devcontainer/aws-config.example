@@ -1,0 +1,10 @@
+# Add this profile block to ~/.aws/config on the host.
+# The DevContainer bind-mounts ~/.aws into /root/.aws so no other setup is needed.
+
+[profile aiworkbench]
+sso_start_url = https://d-9967058feb.awsapps.com/start
+sso_region = eu-central-1
+sso_account_id = 859551917552
+sso_role_name = DeveloperAccess
+sso_registration_scopes = sso:account:access
+region = eu-central-1
