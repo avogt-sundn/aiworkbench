@@ -8,9 +8,9 @@
     "ghcr.io/devcontainers/features/aws-cli:1": {}
   },
   "mounts": [
-    "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
+    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached"
   ],
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -q '[profile bedrock-dev]' /root/.aws/config 2>/dev/null || echo 'WARNING: [profile bedrock-dev] not found in ~/.aws/config — add it (see .devcontainer/aws-config.example) then rebuild'",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -q '[profile bedrock-dev]' /home/vscode/.aws/config 2>/dev/null || echo 'WARNING: [profile bedrock-dev] not found in ~/.aws/config — add it (see .devcontainer/aws-config.example) then rebuild'",
   "postStartCommand": "aws sts get-caller-identity --profile bedrock-dev 2>/dev/null || aws sso login --sso-session sundn-session; claude",
   "remoteEnv": {
     "CLAUDE_CODE_USE_BEDROCK": "1",
